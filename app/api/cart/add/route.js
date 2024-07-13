@@ -90,3 +90,44 @@ export const PATCH = async (req) => {
     });
   }
 };
+
+// export const GET = async(req) =>{
+//   try {
+//     await connectdb();
+
+//     const {userId} = await req.json();
+
+//     const cart = await Cart.findOne({ user: userId }).populate("item.product")
+
+//     if(!cart){
+//         return new Response(JSON.stringify({ message: "Cart not found" }), {
+//           status: 404,
+//         });
+//     }
+
+//     const total = cart.items.reduce((acc, curr) => {
+//       const price = Number(curr.product.discountPrice);
+//       const quantity = Number(curr.quantity);
+
+//       if (!isNaN(price) && !isNaN(quantity)) {
+//         return acc + price * quantity;
+//       } else {
+//         console.error("Invalid price or quantity:", curr.product.discountPrice, curr.quantity);
+//         return acc;
+//       }
+//     }, 0);
+
+//     cart.totalPrice = total;
+//     await cart.save();
+
+//      return new Response(JSON.stringify(cart), {
+//        status: 200,
+//      });
+
+//   } catch (error) {
+//     console.error("Error updating cart total price:", error);
+//     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+//       status: 500,
+//     });
+//   }
+// }

@@ -21,37 +21,37 @@ import {
 
 
 
-const initialState = {
-  productArray: [],
-  loading: false,
-  error: null,
-};
+// const initialState = {
+//   productArray: [],
+//   loading: false,
+//   error: null,
+// };
 
-export const productListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case PRODUCTS_LIST_REQUEST:
-      return { loading: true };
-    case PRODUCTS_LIST_SUCCESS:
-      return { loading: false, productArray: action.payload };
-    case PRODUCTS_LIST_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+// export const productListReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case PRODUCTS_LIST_REQUEST:
+//       return { loading: true };
+//     case PRODUCTS_LIST_SUCCESS:
+//       return { loading: false, productArray: action.payload };
+//     case PRODUCTS_LIST_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
-export const productCreateReducer = (state = {}, action) => {
-  switch (action.type) {
-    case PRODUCTS_CREATE_REQUEST:
-      return { loading: true };
-    case PRODUCTS_CREATE_SUCCESS:
-      return { loading: false, success: true, product: action.payload };
-    case PRODUCTS_CREATE_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+// export const productCreateReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case PRODUCTS_CREATE_REQUEST:
+//       return { loading: true };
+//     case PRODUCTS_CREATE_SUCCESS:
+//       return { loading: false, success: true, product: action.payload };
+//     case PRODUCTS_CREATE_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
 // export const productListUserReducer = 
 
@@ -59,7 +59,7 @@ export const filterProductReducer = (
   state = {
     byStock: false,
     byFreeDelivery: false,
-    byRating: 0,
+    byRating: false,
     searchQuery: "",
     byDiscount: false,
   },
@@ -69,11 +69,11 @@ export const filterProductReducer = (
     case SORT_BY_PRICE:
       return { ...state, sort: action.payload };
     case FILTER_BY_STOCK:
-      return { ...state, byStock: !state.byStock };
+      return { ...state, byStock : !state.byStock };
     case FILTER_BY_DELIVERY:
       return { ...state, byFreeDelivery: !state.byFreeDelivery };
     case FILTER_BY_RATING:
-      return { ...state, byRating: action.payload };
+      return { ...state, byRating: !action.payload };
     case FILTER_BY_SEARCH:
       return { ...state, searchQuery: action.payload };
     case FILTER_BY_DISCOUNT:
@@ -81,8 +81,8 @@ export const filterProductReducer = (
     case CLEAR_FILTERS:
       return {
         byStock: false,
-        byFastDelivery: false,
-        byRating: 0,
+        byFreeDelivery: false,
+        byRating: false,
         searchQuery: "",
         byDiscount: false,
       };

@@ -15,7 +15,8 @@
     "@headlessui/react": "^2.1.2",
     "@mui/material": "^5.15.21",
     "@reduxjs/toolkit": "^2.2.6",
-    "@stripe/stripe-js": "^4.0.0",
+    "@stripe/react-stripe-js": "^2.7.3",
+    "@stripe/stripe-js": "^4.1.0",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "lottie-react": "^2.4.0",
@@ -30,7 +31,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
     "slick-carousel": "^1.8.1",
-    "stripe": "^16.1.0"
+    "stripe": "^16.2.0"
   },
   "devDependencies": {
     "postcss": "^8",

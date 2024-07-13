@@ -1,8 +1,10 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useReducer } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+// import { productReducer } from "@reducers/filterSlice";
+import { filterProductReducer } from "@reducers/productReducer";
 
 const GlobalContext = createContext();
 
@@ -12,6 +14,8 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     if (session) {
+      const controller = new AbortController();
+
       fetchCart();
     }
   }, [session, cart]);
@@ -45,7 +49,7 @@ export const GlobalProvider = ({ children }) => {
       const res = await axios.delete("/api/cart/remove", {
         data: {
           productId,
-          userId: session?.user.id, 
+          userId: session?.user.id,
         },
       });
       console.log("removed succesfully");
@@ -54,12 +58,22 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const [productState,productDispatch] = useReducer(filterProductReducer,{
+    byStock: false,
+    byFreeDelivery: false,
+    byRating: 0,
+    searchQuery:"",
+    
+
+  })
+
   return (
     <GlobalContext.Provider
       value={{
         cart,
         addToCart,
         removeFromCart,
+        productDispatch,productState
       }}
     >
       {children}

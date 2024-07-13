@@ -1,46 +1,34 @@
-import { Fade, Paper } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Fade, Paper } from "@mui/material";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-import {
-  CLEAR_FILTERS,
-  FILTER_BY_DELIVERY,
-  FILTER_BY_DISCOUNT,
-  FILTER_BY_RATING,
-  SORT_BY_PRICE,
-} from "../constants/filterConstants";
+
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useGlobal } from "@app/context/page";
+import { CLEAR_FILTERS, FILTER_BY_DELIVERY, FILTER_BY_DISCOUNT, FILTER_BY_RATING, SORT_BY_PRICE } from "@constants/filterConstants";
 
 const SortPop = () => {
-  const [sortOpen, setSortOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(true);
   const handleSortChange = () => {
     setSortOpen((Prev) => !Prev);
   };
 
-  const dispatch = useDispatch();
-
-  const filterState = useSelector((state) => state.filterState);
-  const { byFreeDelivery, byRating, sort, searchQuery, byDiscount } =
-    filterState;
-
-  const isAnyFilterChecked = byFreeDelivery || byDiscount || sort !== "";
-
+  const {productState:{ byStock,byFreeDelivery,byDiscount,byRating,sort, searchQuery}, productDispatch} = useGlobal();
   return (
-    <div className="relative">
+    <div className="relative  min-w-[20vw]">
       <div className="border flex justify-between items-baseline px-2 py-1.5 rounded">
         <p className="text-lg tracking-wide">Sort by :</p>
-        {isAnyFilterChecked && (
-          <button
-            onClick={() =>
-              dispatch({
-                type: CLEAR_FILTERS,
-              })
-            }
-            className="bg-sky-50 px-1 rounded-sm hover:underline"
-          >
-            CLEAR FILTERS
-          </button>
-        )}
+        
+        <Button
+          variant="outlined"
+          onClick={() =>
+            productDispatch({
+              type: CLEAR_FILTERS,
+            })
+          }
+        >
+          Clear Filters
+        </Button>
+
         {!sortOpen ? (
           <IoIosArrowDown onClick={handleSortChange} className="mx-3" />
         ) : (
@@ -57,7 +45,7 @@ const SortPop = () => {
               type="radio"
               id={`inline-1`}
               onChange={() =>
-                dispatch({
+                productDispatch({
                   type: SORT_BY_PRICE,
                   payload: "lowToHigh",
                 })
@@ -74,7 +62,7 @@ const SortPop = () => {
               type="radio"
               id={`inline-2`}
               onChange={() =>
-                dispatch({
+                productDispatch({
                   type: SORT_BY_PRICE,
                   payload: "highToLow",
                 })
@@ -91,7 +79,7 @@ const SortPop = () => {
               type="checkbox"
               id={`inline-4`}
               onChange={() =>
-                dispatch({
+                productDispatch({
                   type: FILTER_BY_DELIVERY,
                 })
               }
@@ -107,7 +95,7 @@ const SortPop = () => {
               type="checkbox"
               id={`inline-6`}
               onChange={() =>
-                dispatch({
+                productDispatch({
                   type: FILTER_BY_DISCOUNT,
                 })
               }
@@ -123,12 +111,11 @@ const SortPop = () => {
               type="checkbox"
               id={`inline-7`}
               onChange={() =>
-                dispatch({
+                productDispatch({
                   type: FILTER_BY_RATING,
-                  payload: "",
                 })
               }
-              //   checked={byFreeDelivery}
+                checked={byRating}
             />
           </span>
         </Paper>

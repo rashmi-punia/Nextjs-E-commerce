@@ -29,7 +29,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="w-full px-12 bg-pink-800 text-white mb-16 py-4 flex-between">
+    <nav className="w-full px-12 bg-gradient-to-br from-sky-100 to-purple-400/70 text-white mb-16 py-4 flex-between">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/logo.svg"
@@ -47,12 +47,7 @@ const Nav = () => {
           type="text"
           placeholder="Type Saree,kurti.."
           name="search"
-          onChange={(e) =>
-            dispatch({
-              type: FILTER_BY_SEARCH,
-              payload: e.target.value,
-            })
-          }
+         
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           className="px-4 outline-none"

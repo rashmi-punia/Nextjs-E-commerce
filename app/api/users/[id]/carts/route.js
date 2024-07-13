@@ -17,6 +17,26 @@ export const GET = async (req, { params }) => {
       });
     }
 
+      const total = cart.items.reduce((acc, curr) => {
+        const price = Number(curr.product.discountPrice);
+        const quantity = Number(curr.quantity);
+
+        if (!isNaN(price) && !isNaN(quantity)) {
+          return acc + price * quantity;
+        } else {
+          console.error(
+            "Invalid price or quantity:",
+            curr.product.discountPrice,
+            curr.quantity
+          );
+          return acc;
+        }
+      }, 0);
+
+      cart.totalPrice = total;
+      await cart.save();
+
+
     return new Response(JSON.stringify(cart), {
       status: 200,
     });

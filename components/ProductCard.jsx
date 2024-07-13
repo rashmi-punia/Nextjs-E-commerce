@@ -15,12 +15,12 @@ const ProductCard = ({ product, handleDelete, handleUpdate }) => {
   return (
     <div
       key={product._id}
-      className="group border p-1 min-w-60 max-w-80 w-[20vw] *:rounded rounded-lg overflow-hidden"
+      className="group flex flex-col border p-1 min-w-50 max-w-70 w-[18vw] *:rounded rounded-lg overflow-hidden"
     >
       <div className="h-[35vh]  relative overflow-hidden flex items-center justify-center">
         <img
           src={product.images[0]}
-          className="object-cover relative h-full w-fit object-center group-hover:opacity-85"
+          className="object-cover relative h-full w-full object-center group-hover:opacity-85"
         />
         {product.stock ? (
           <span className="bg-gray-100 p-1.5 text-xs rounded-tl-xl absolute bottom-0 right-0">
@@ -32,7 +32,7 @@ const ProductCard = ({ product, handleDelete, handleUpdate }) => {
           </span>
         )}
       </div>
-      <div whileHover={{ y: -5 }} className="p-2 bg-white">
+      <div whileHover={{ y: -5 }} className="p-2  flex-1">
         <div className="bg-sky-400 text-white w-fit text-sm px-2 rounded-full">
           {product.category}
         </div>
@@ -42,7 +42,7 @@ const ProductCard = ({ product, handleDelete, handleUpdate }) => {
         <div>{product.brand}</div>
         <div className="space-x-2">
           <span className="text-xl">${product.discountPrice}</span>
-          <s>${product.price}</s>
+          <s>${Math.floor(product.price)}</s>
           <span className="text-green-600 text-lg">
             {product.discountPercentage} %
           </span>
@@ -51,7 +51,7 @@ const ProductCard = ({ product, handleDelete, handleUpdate }) => {
         <div className="bg-gray-100 rounded-2xl my-1 text-sm w-fit px-2">
           {product.isFreeDelivery
             ? "FreeDelivery"
-            : product.deliveryCharge + "$"}
+            : product.deliveryCharge + "$ delivery"}
         </div>
         <span className="bg-green-500 text-white px-2 rounded-2xl">
           {product.ratings}{" "}

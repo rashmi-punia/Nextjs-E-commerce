@@ -3,10 +3,9 @@ import SortFilter from './SortFilter'
 
 const Filters = () => {
   return (
-    <div>
-      <SortFilter />
-    </div>
-  )
+<div>
+  filter
+</div>  )
 }
 
 export default Filters

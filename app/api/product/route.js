@@ -8,6 +8,16 @@ export const GET = async(req) => {
 
         const products = await Product.find({}).populate('creator')
 
+        // if(req.query.search){
+        //     const filteredProducts = products.filter(product=>
+        //         product.title.includes(req.query.search)
+        //     )
+        //     return new Response(JSON.stringify(filteredProducts),{
+        //         status: 200
+        //     })
+        //     return
+        // }
+
         return new Response(JSON.stringify(products),{
             status : 200
         })
